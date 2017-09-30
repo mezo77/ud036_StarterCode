@@ -1,170 +1,78 @@
-import webbrowser
-import os
-import re
+import fresh_tomatoes
+import media
 
 
-# Styles and scripting for the page
-main_page_head = '''
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <title>Fresh Tomatoes!</title>
-
-    <!-- Bootstrap 3 -->
-    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap-theme.min.css">
-    <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
-    <script src="https://netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
-    <style type="text/css" media="screen">
-        body {
-            padding-top: 80px;
-        }
-        #trailer .modal-dialog {
-            margin-top: 200px;
-            width: 640px;
-            height: 480px;
-        }
-        .hanging-close {
-            position: absolute;
-            top: -12px;
-            right: -12px;
-            z-index: 9001;
-        }
-        #trailer-video {
-            width: 100%;
-            height: 100%;
-        }
-        .movie-tile {
-            margin-bottom: 20px;
-            padding-top: 20px;
-            
-        }
-        .movie-tile:hover {
-            background-color: #EEE;
-            cursor: pointer;
-        }
-        .scale-media {
-            padding-bottom: 56.25%;
-            position: relative;
-
-        }
-        .scale-media iframe {
-            border: none;
-            height: 100%;
-            position: absolute;
-            width: 100%;
-            left: 0;
-            top: 0;
-            background-color: white;
-            clear: left;
-        }
-    </style>
-    <script type="text/javascript" charset="utf-8">
-        // Pause the video when the modal is closed
-        $(document).on('click', '.hanging-close, .modal-backdrop, .modal', function (event) {
-            // Remove the src so the player itself gets removed, as this is the only
-            // reliable way to ensure the video stops playing in IE
-            $("#trailer-video-container").empty();
-        });
-        // Start playing the video whenever the trailer modal is opened
-        $(document).on('click', '.movie-tile', function (event) {
-            var trailerYouTubeId = $(this).attr('data-trailer-youtube-id')
-            var sourceUrl = 'http://www.youtube.com/embed/' + trailerYouTubeId + '?autoplay=1&html5=1';
-            $("#trailer-video-container").empty().append($("<iframe></iframe>", {
-              'id': 'trailer-video',
-              'type': 'text-html',
-              'src': sourceUrl,
-              'frameborder': 0
-            }));
-        });
-        // Animate in the movies when the page loads
-        $(document).ready(function () {
-          $('.movie-tile').hide().first().show("fast", function showNext() {
-            $(this).next("div").show("fast", showNext);
-          });
-        });
-    </script>
-</head>
-'''
 
 
-# The main page layout and title bar
-main_page_content = '''
-  <body>
-    <!-- Trailer Video Modal -->
-    <div class="modal" id="trailer">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <a href="#" class="hanging-close" data-dismiss="modal" aria-hidden="true">
-            <img src="https://lh5.ggpht.com/v4-628SilF0HtHuHdu5EzxD7WRqOrrTIDi_MhEG6_qkNtUK5Wg7KPkofp_VJoF7RS2LhxwEFCO1ICHZlc-o_=s0#w=24&h=24"/>
-          </a>
-          <div class="scale-media" id="trailer-video-container">
-          </div>
-        </div>
-      </div>
-    </div>
+#this creates an object of the Movie class and it contains info of the hobbit movie part one
+hobbit_1 = media.Movie("The Hobbit: An Unexpected Journey (2012)",
+"https://agcrump.files.wordpress.com/2012/12/the-hobbit-part-1-an-unexpected-journey-2012-movie-poster-e1348339281255.jpg",
+"https://www.youtube.com/watch?v=SDnYMbYB-nU")
 
-    <!-- Main Page Content -->
-    <div class="container">
-      <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-        <div class="container">
-          <div class="navbar-header">
-            <a class="navbar-brand" href="#">Fresh Tomatoes Movie Trailers</a>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="container">
-      {movie_tiles}
-    </div>
-  </body>
-</html>
-'''
+#this creates an object of the Movie class and it contains info of the hobbit movie part two
+hobbit_2 = media.Movie("The Hobbit: The Desolation of Smaug (2013)", "https://vignette3.wikia.nocookie.net/lotr/images/f/f8/The-hobbit-the-desolation-of-smaug-poster.jpg/"
++"revision/latest?cb=20140227201637", "https://www.youtube.com/watch?v=fnaojlfdUbs")
+
+#this creates an object of the Movie class and it contains info of the hobbit movie part three
+hobbit_3 = media.Movie("The Hobbit: The Battle of the Five Armies (2014)",
+ "https://images-na.ssl-images-amazon.com/images/M/MV5BODAzMDgxMDc1MF5BMl5BanBnXkFtZTgwMTI0OTAzMjE@" +"._V1_UY1200_CR90,0,630,1200_AL_.jpg", "https://www.youtube.com/watch?v=iVAgTiBrrDA")
 
 
-# A single movie entry html template
-movie_tile_content = '''
-<div class="col-md-6 col-lg-4 movie-tile text-center" data-trailer-youtube-id="{trailer_youtube_id}" data-toggle="modal" data-target="#trailer">
-    <img src="{poster_image_url}" width="220" height="342">
-    <h2>{movie_title}</h2>
-</div>
-'''
+#this creates a Movie object and it containes info about the lord of the rings part 1 movie
+the_lord_of_the_rings_1 = media.Movie("The Lord of the Rings: The Fellowship of the Ring (2001)",
+   "https://images-na.ssl-images-amazon.com/images/I/51Qvs9i5a%2BL.jpg",
+    "https://www.youtube.com/watch?v=V75dMMIW2B4&t=11s")
+
+#this creates a Movie object and it containes info about the lord of the rings part 2 movie
+the_lord_of_the_rings_2 = media.Movie("The Lord of the Rings: The Two Towers (2002)",
+ "http://saint-epondyle.net/blog/wp-content/uploads/2012/12/clemburtonlesdeuxtours.jpg",
+"https://www.youtube.com/watch?v=LbfMDwc4azU")
+
+#this creates a Movie object and it containes info about the lord of the rings part 3 movie
+the_lord_of_the_rings_3 = media.Movie("The Lord of the Rings: The Return of the King (2003)",
+ "https://s-media-cache-ak0.pinimg.com/originals/8e/77/c3/8e77c3ceeede5d63ee0bfdc19408565b.jpg",
+"https://www.youtube.com/watch?v=r5X-hFf6Bwo")
+
+#this creats an object of the Movie class and it contains info of saving private ryan movie
+saving_private = media.Movie("Saving Private Ryan (1998)", "http://is5.mzstatic.com/image/thumb/Video/v4/66/83/44/668344c7-a8fa-107c-72f9-b1fdceb226c6/source/1200x630bb.jpg",
+"https://www.youtube.com/watch?v=zwhP5b4tD6g")
+
+#this object holds info about enemy at the gate movie
+enemy_at_the_gates = media.Movie("Enemy at the Gates (2001)",  "https://images-na.ssl-images-amazon.com/images/M/"
++"MV5BYWFlY2E3ODQtZWNiNi00ZGU4LTkzNWEtZTQ2ZTViMWRhYjIzL2ltYWdlXkEyXkFqcGdeQXVyNTAyODkwOQ@@."
++"_V1_UY1200_CR87,0,630,1200_AL_.jpg","https://www.youtube.com/watch?v=4O-sMh_DO6I")
+
+fury = media.Movie("Fury (2014)",
+"https://images-na.ssl-images-amazon.com/images/M/"
++"MV5BMjA4MDU0NTUyN15BMl5BanBnXkFtZTgwMzQxMzY4MjE@._V1_UY1200_CR90,0,630,1200_AL_.jpg", "https://www.youtube.com/watch?v=DNHuK1rteF4")
+
+the_shawshank = media.Movie("The Shawshank Redemption (1994)",
+ "https://image.tmdb.org/t/p/w500/9O7gLzmreU0nGkIB6K3BsJbzvNv.jpg",
+  "https://www.youtube.com/watch?v=6hB3S9bIaco")
+
+mouse_hunt = media.Movie("Mousehunt (1997)","https://images-na.ssl-images-amazon.com/images/"
++"M/MV5BMzE0NTRhZWQtZmE5OS00NTI5LWJhMzMtMGU4MzE4MmRlZDE0L2ltYWdlL2ltYWdlXkEyXkFqcGdeQXVyMTQxNzMzNDI@"
++"._V1_UY1200_CR92,0,630,1200_AL_.jpg","https://www.youtube.com/watch?v=zgjUMHGjO0k")
+
+braveheart = media.Movie("Braveheart (1995)","https://www.movieposter.com/posters/archive/main/70/MPW-35017"
+, "https://www.youtube.com/watch?v=wj0I8xVTV18")
+
+the_fault_in_our_stars = media.Movie("The Fault in Our Stars (2014)","https://i.pinimg.com/736x/1b/af/9a/1baf9a7f2f5465428a5746f6b0eec4c7--star-crossed-hazel-and-augustus.jpg",
+"https://www.youtube.com/watch?v=9ItBvH5J6ss")
+
+me_before_you = media.Movie("Me Before You (2016)", "https://images-na.ssl-images-amazon.com/images/M/"
++"MV5BMTQ2NjE4NDE2NV5BMl5BanBnXkFtZTgwOTcwNDE5NzE@._V1_UY1200_CR90,0,630,1200_AL_.jpg", "https://www.youtube.com/watch?v=Eh993__rOxA")
+
+collateral_beauty = media.Movie("Collateral Beauty (2016)", "https://www.movietard.com/wp-content/uploads/2017/03/Collateral-Beauty-2016.jpg",
+ "https://www.youtube.com/watch?v=isQ5Ycie73U")
 
 
-def create_movie_tiles_content(movies):
-    # The HTML content for this section of the page
-    content = ''
-    for movie in movies:
-        # Extract the youtube ID from the url
-        youtube_id_match = re.search(
-            r'(?<=v=)[^&#]+', movie.youtube_trailer_url)
-        youtube_id_match = youtube_id_match or re.search(
-            r'(?<=be/)[^&#]+', movie.youtube_trailer_url)
-        trailer_youtube_id = (youtube_id_match.group(0) if youtube_id_match
-                              else None)
-
-        # Append the tile for the movie with its content filled in
-        content += movie_tile_content.format(
-            movie_title=movie.title,
-            poster_image_url=movie.poster_image_url,
-            trailer_youtube_id=trailer_youtube_id
-        )
-    return content
+#this list holds all Movie objects
+movies = [fury, saving_private,
+enemy_at_the_gates,the_lord_of_the_rings_1,the_lord_of_the_rings_2,the_lord_of_the_rings_3,hobbit_1,hobbit_3, hobbit_2,
+the_shawshank, mouse_hunt,braveheart, collateral_beauty,the_fault_in_our_stars, me_before_you]
 
 
-def open_movies_page(movies):
-    # Create or overwrite the output file
-    output_file = open('fresh_tomatoes.html', 'w')
 
-    # Replace the movie tiles placeholder generated content
-    rendered_content = main_page_content.format(
-        movie_tiles=create_movie_tiles_content(movies))
 
-    # Output the file
-    output_file.write(main_page_head + rendered_content)
-    output_file.close()
-
-    # open the output file in the browser (in a new tab, if possible)
-    url = os.path.abspath(output_file.name)
-    webbrowser.open('file://' + url, new=2)
+fresh_tomatoes.open_movies_page(movies)
