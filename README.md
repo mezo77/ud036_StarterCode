@@ -10,6 +10,6 @@
   2. Run the fresh_tomatoes.html file
 
 ## License
-> you can find the license [here]()
+> you can find the license [here](https://github.com/mezo77/ud036_StarterCode/blob/master/LICENSE.md)
 
-This project is licensed under the terms of the MIT license 
+This project is licensed under the terms of the MIT license
