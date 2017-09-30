@@ -34,7 +34,8 @@ the_lord_of_the_rings_3 = media.Movie("The Lord of the Rings: The Return of the 
 "https://www.youtube.com/watch?v=r5X-hFf6Bwo")
 
 #this creats an object of the Movie class and it contains info of saving private ryan movie
-saving_private = media.Movie("Saving Private Ryan (1998)", "http://is5.mzstatic.com/image/thumb/Video/v4/66/83/44/668344c7-a8fa-107c-72f9-b1fdceb226c6/source/1200x630bb.jpg",
+saving_private = media.Movie("Saving Private Ryan (1998)", "http://is5.mzstatic.com/image/thumb/Video/v4/"
++"66/83/44/668344c7-a8fa-107c-72f9-b1fdceb226c6/source/1200x630bb.jpg",
 "https://www.youtube.com/watch?v=zwhP5b4tD6g")
 
 #this object holds info about enemy at the gate movie
@@ -57,7 +58,8 @@ mouse_hunt = media.Movie("Mousehunt (1997)","https://images-na.ssl-images-amazon
 braveheart = media.Movie("Braveheart (1995)","https://www.movieposter.com/posters/archive/main/70/MPW-35017"
 , "https://www.youtube.com/watch?v=wj0I8xVTV18")
 
-the_fault_in_our_stars = media.Movie("The Fault in Our Stars (2014)","https://i.pinimg.com/736x/1b/af/9a/1baf9a7f2f5465428a5746f6b0eec4c7--star-crossed-hazel-and-augustus.jpg",
+the_fault_in_our_stars = media.Movie("The Fault in Our Stars (2014)","https://i.pinimg.com/736x/1b/af/9a/"
++"1baf9a7f2f5465428a5746f6b0eec4c7--star-crossed-hazel-and-augustus.jpg",
 "https://www.youtube.com/watch?v=9ItBvH5J6ss")
 
 me_before_you = media.Movie("Me Before You (2016)", "https://images-na.ssl-images-amazon.com/images/M/"
