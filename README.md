@@ -7,7 +7,7 @@
 ## How To Run It
   1. There are 3 python files included (media.py, my_cenima.py and fresh_tomatoes.py) run my_cinema.py file and if you don't have python installed you can download and install it from [here](https://www.python.org/downloads/)
 
-  2. Run the fresh_tomatoes.html file
+  2. Or you can run the fresh_tomatoes.html file
 
 ## License
 > you can find the license [here](https://github.com/mezo77/ud036_StarterCode/blob/master/LICENSE.md)
