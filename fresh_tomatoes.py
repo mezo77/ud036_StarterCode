@@ -38,6 +38,7 @@ main_page_head = '''
         .movie-tile {
             margin-bottom: 20px;
             padding-top: 20px;
+            
         }
         .movie-tile:hover {
             background-color: #EEE;
@@ -46,6 +47,7 @@ main_page_head = '''
         .scale-media {
             padding-bottom: 56.25%;
             position: relative;
+
         }
         .scale-media iframe {
             border: none;
@@ -55,6 +57,7 @@ main_page_head = '''
             left: 0;
             top: 0;
             background-color: white;
+            clear: left;
         }
     </style>
     <script type="text/javascript" charset="utf-8">
@@ -135,9 +138,9 @@ def create_movie_tiles_content(movies):
     for movie in movies:
         # Extract the youtube ID from the url
         youtube_id_match = re.search(
-            r'(?<=v=)[^&#]+', movie.trailer_youtube_url)
+            r'(?<=v=)[^&#]+', movie.youtube_trailer_url)
         youtube_id_match = youtube_id_match or re.search(
-            r'(?<=be/)[^&#]+', movie.trailer_youtube_url)
+            r'(?<=be/)[^&#]+', movie.youtube_trailer_url)
         trailer_youtube_id = (youtube_id_match.group(0) if youtube_id_match
                               else None)
 
